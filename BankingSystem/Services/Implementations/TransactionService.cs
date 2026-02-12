@@ -46,8 +46,17 @@ public class TransactionService : ITransactionService
         fromAccount.Withdraw(amount);
         toAccount.Deposit(amount);
 
-        var transferOut = new TransferTransaction(fromAccountNumber, toAccountNumber, amount, $"{description} (Out)");
-        var transferIn = new TransferTransaction(toAccountNumber, fromAccountNumber, amount, $"{description} (In)");
+        var transferOut = new TransferTransaction(
+            fromAccountNumber, 
+            toAccountNumber, 
+            amount, 
+            $"{description} (Out)");
+        
+        var transferIn = new TransferTransaction(
+            toAccountNumber, 
+            fromAccountNumber, 
+            amount, 
+            $"{description} (In)");
 
         fromAccount.AddTransaction(transferOut);
         toAccount.AddTransaction(transferIn);

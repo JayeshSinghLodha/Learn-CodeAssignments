@@ -14,7 +14,11 @@ public class LoanManager
 
     public Loan CreateLoan(int customerId, decimal principalAmount, decimal interestRate, int durationInMonths)
     {
-        var loan = _loanService.CreateLoan(customerId, principalAmount, interestRate, durationInMonths);
+        var loan = _loanService.CreateLoan(
+            customerId, 
+            principalAmount, 
+            interestRate, 
+            durationInMonths);
         
         Console.WriteLine("\nLoan Created Successfully");
         Console.WriteLine("-------------------------");
@@ -22,7 +26,9 @@ public class LoanManager
         Console.WriteLine($"Principal Amount: ${loan.PrincipalAmount:N2}");
         Console.WriteLine($"Interest Rate: {loan.InterestRate}%");
         Console.WriteLine($"Duration: {loan.DurationInMonths} months");
-        Console.WriteLine($"Total Amount (with interest): ${loan.CalculateTotalAmountWithInterest():N2}");
+        Console.WriteLine(
+            $"Total Amount (with interest): " +
+            $"${loan.CalculateTotalAmountWithInterest():N2}");
         Console.WriteLine($"Monthly Payment: ${loan.CalculateMonthlyPayment():N2}");
 
         return loan;
