@@ -2,7 +2,7 @@ using LawOfDemeterAssignment.Domain;
 
 namespace LawOfDemeterAssignment.Services;
 
-public sealed class Paperboy
+class Paperboy
 {
     public bool CollectPayment(Customer customer, decimal paymentAmount)
     {

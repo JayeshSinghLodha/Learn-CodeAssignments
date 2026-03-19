@@ -1,6 +1,6 @@
 namespace LawOfDemeterAssignment.Domain;
 
-public sealed class Customer
+class Customer
 {
     private readonly Wallet _wallet;
 

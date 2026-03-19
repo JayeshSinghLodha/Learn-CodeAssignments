@@ -1,6 +1,6 @@
 namespace LawOfDemeterAssignment.Domain;
 
-internal sealed class Wallet
+class Wallet
 {
     private decimal _value;
 
