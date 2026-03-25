@@ -1,5 +1,7 @@
 using System;
 
+namespace ATMSystem;
+
 public class ATMDeviceController
 {
     public void Withdraw(string accountId, decimal amount)
@@ -95,50 +97,4 @@ public class ATMDeviceController
     {
         throw new NotImplementedException();
     }
-}
-
-public class DeviceLockedException : Exception
-{
-    public DeviceLockedException(string message) : base(message)
-    {
-    }
-}
-
-public sealed class InsufficientFundsException : Exception
-{
-    public InsufficientFundsException(string message) : base(message)
-    {
-    }
-}
-
-public sealed class NetworkConnectionException : Exception
-{
-    public NetworkConnectionException(string message) : base(message)
-    {
-    }
-}
-
-public enum DeviceHandle
-{
-    Invalid = 0,
-    Dev1 = 1
-}
-
-public enum DeviceStatus
-{
-    Active = 1,
-    Suspended = 2
-}
-
-public enum WifiConnection
-{
-    Disconnected = 0,
-    Connected = 1
-}
-
-public sealed class DeviceRecord
-{
-    public DeviceStatus Status { get; init; }
-
-    public WifiConnection WifiConnection { get; init; }
 }
