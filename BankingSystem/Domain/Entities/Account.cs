@@ -1,3 +1,5 @@
+using BankingSystem.Domain.Exceptions;
+
 namespace BankingSystem.Domain.Entities;
 
 public class Account
@@ -31,7 +33,7 @@ public class Account
             throw new ArgumentException("Withdrawal amount must be positive.");
 
         if (Balance < amount)
-            throw new InvalidOperationException("Insufficient funds.");
+            throw new InsufficientFundsException(AccountNumber, amount, Balance);
 
         Balance -= amount;
     }

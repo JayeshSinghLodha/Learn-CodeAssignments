@@ -1,3 +1,4 @@
+using BankingSystem.Domain.Exceptions;
 using BankingSystem.Managers;
 
 namespace BankingSystem.UI;
@@ -48,6 +49,9 @@ public class ConsoleUI
                         LoanManagementMenu();
                         break;
                     case "5":
+                        RunCustomExceptionDemo();
+                        break;
+                    case "6":
                         running = false;
                         Console.WriteLine("\nThank you for using Banking System. Goodbye!");
                         break;
@@ -55,6 +59,12 @@ public class ConsoleUI
                         Console.WriteLine("\nInvalid choice. Please try again.");
                         break;
                 }
+            }
+            catch (InsufficientFundsException ex)
+            {
+                Console.WriteLine("\nCustom Exception Triggered");
+                Console.WriteLine("--------------------------");
+                Console.WriteLine(ex.Message);
             }
             catch (Exception ex)
             {
@@ -78,7 +88,8 @@ public class ConsoleUI
         Console.WriteLine("2. Account Management");
         Console.WriteLine("3. Transactions");
         Console.WriteLine("4. Loan Management");
-        Console.WriteLine("5. Exit");
+        Console.WriteLine("5. Custom Exception Demo");
+        Console.WriteLine("6. Exit");
     }
 
     private void CustomerManagementMenu()
@@ -444,6 +455,28 @@ public class ConsoleUI
         }
 
         Console.WriteLine($"\nTotal Loans: {loans.Count}");
+    }
+
+    private void RunCustomExceptionDemo()
+    {
+        Console.WriteLine("\nCustom Exception Demo");
+        Console.WriteLine("---------------------");
+        Console.WriteLine("This demo creates an account with $100.00 and tries to withdraw $250.00.");
+
+        var demoCustomer = _customerManager.CreateCustomer(
+            "Demo",
+            "User",
+            $"demo.{Guid.NewGuid():N}@example.com",
+            "555-0100",
+            new DateTime(1990, 1, 1));
+
+        var demoAccount = _accountManager.CreateAccount(demoCustomer.CustomerId, 100m);
+
+        Console.WriteLine($"Demo Account Number: {demoAccount.AccountNumber}");
+        Console.WriteLine($"Current Balance: ${demoAccount.Balance:N2}");
+        Console.WriteLine("Attempting withdrawal...");
+
+        _transactionManager.Withdraw(demoAccount.AccountNumber, 250m, "Custom exception demo");
     }
 
     private string GetUserInput(string prompt)

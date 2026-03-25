@@ -55,17 +55,3 @@ public class Loan
             Status = LoanStatus.Paid;
     }
 }
-
-public class LoanPayment
-{
-    public int LoanId { get; set; }
-    public decimal Amount { get; set; }
-    public DateTime PaymentDate { get; set; }
-
-    public LoanPayment(int loanId, decimal amount, DateTime paymentDate)
-    {
-        LoanId = loanId;
-        Amount = amount;
-        PaymentDate = paymentDate;
-    }
-}
